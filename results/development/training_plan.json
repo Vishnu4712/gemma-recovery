@@ -1,0 +1,778 @@
+{
+  "seed": 42,
+  "c1_count": 55,
+  "c2_count": 55,
+  "c1_target_tokens": 5963,
+  "c2_target_tokens": 5963,
+  "relative_token_difference": 0.0,
+  "c1_sources": {
+    "model_success": 50,
+    "verified_reference": 5
+  },
+  "c2_sources": {
+    "verified_reference_correction": 17,
+    "model_success": 27,
+    "verified_reference": 4,
+    "self_recovery": 7
+  },
+  "c1_task_ids": [
+    617,
+    625,
+    640,
+    663,
+    685,
+    699,
+    700,
+    706,
+    712,
+    719,
+    812,
+    815,
+    821,
+    828,
+    830,
+    831,
+    833,
+    847,
+    853,
+    857,
+    861,
+    881,
+    885,
+    891,
+    906,
+    907,
+    909,
+    914,
+    918,
+    923,
+    929,
+    932,
+    933,
+    949,
+    955,
+    956,
+    958,
+    960,
+    968,
+    974
+  ],
+  "c2_task_ids": [
+    617,
+    625,
+    640,
+    663,
+    685,
+    699,
+    706,
+    712,
+    815,
+    821,
+    828,
+    831,
+    833,
+    857,
+    861,
+    881,
+    885,
+    906,
+    907,
+    909,
+    914,
+    918,
+    923,
+    929,
+    932,
+    949,
+    956,
+    958,
+    960,
+    968,
+    974
+  ],
+  "c1_rows": [
+    {
+      "task_id": 833,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 18
+    },
+    {
+      "task_id": 831,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 73
+    },
+    {
+      "task_id": 918,
+      "sample_index": null,
+      "source": "verified_reference",
+      "target_tokens": 163
+    },
+    {
+      "task_id": 617,
+      "sample_index": null,
+      "source": "verified_reference",
+      "target_tokens": 115
+    },
+    {
+      "task_id": 828,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 102
+    },
+    {
+      "task_id": 932,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 62
+    },
+    {
+      "task_id": 857,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 25
+    },
+    {
+      "task_id": 909,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 354
+    },
+    {
+      "task_id": 885,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 207
+    },
+    {
+      "task_id": 663,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 27
+    },
+    {
+      "task_id": 861,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 64
+    },
+    {
+      "task_id": 955,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 106
+    },
+    {
+      "task_id": 640,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 54
+    },
+    {
+      "task_id": 881,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 142
+    },
+    {
+      "task_id": 815,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 122
+    },
+    {
+      "task_id": 847,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 21
+    },
+    {
+      "task_id": 968,
+      "sample_index": null,
+      "source": "verified_reference",
+      "target_tokens": 38
+    },
+    {
+      "task_id": 907,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 386
+    },
+    {
+      "task_id": 831,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 82
+    },
+    {
+      "task_id": 958,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 174
+    },
+    {
+      "task_id": 932,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 58
+    },
+    {
+      "task_id": 929,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 37
+    },
+    {
+      "task_id": 719,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 46
+    },
+    {
+      "task_id": 830,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 82
+    },
+    {
+      "task_id": 906,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 68
+    },
+    {
+      "task_id": 974,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 164
+    },
+    {
+      "task_id": 958,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 181
+    },
+    {
+      "task_id": 815,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 151
+    },
+    {
+      "task_id": 929,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 43
+    },
+    {
+      "task_id": 960,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 163
+    },
+    {
+      "task_id": 974,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 220
+    },
+    {
+      "task_id": 891,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 27
+    },
+    {
+      "task_id": 923,
+      "sample_index": null,
+      "source": "verified_reference",
+      "target_tokens": 126
+    },
+    {
+      "task_id": 700,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 61
+    },
+    {
+      "task_id": 853,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 66
+    },
+    {
+      "task_id": 949,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 97
+    },
+    {
+      "task_id": 828,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 111
+    },
+    {
+      "task_id": 699,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 133
+    },
+    {
+      "task_id": 861,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 49
+    },
+    {
+      "task_id": 830,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 168
+    },
+    {
+      "task_id": 914,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 260
+    },
+    {
+      "task_id": 956,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 41
+    },
+    {
+      "task_id": 933,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 75
+    },
+    {
+      "task_id": 914,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 132
+    },
+    {
+      "task_id": 706,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 62
+    },
+    {
+      "task_id": 885,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 223
+    },
+    {
+      "task_id": 857,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 21
+    },
+    {
+      "task_id": 949,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 210
+    },
+    {
+      "task_id": 685,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 115
+    },
+    {
+      "task_id": 821,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 55
+    },
+    {
+      "task_id": 712,
+      "sample_index": null,
+      "source": "verified_reference",
+      "target_tokens": 51
+    },
+    {
+      "task_id": 821,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 197
+    },
+    {
+      "task_id": 625,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 47
+    },
+    {
+      "task_id": 625,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 67
+    },
+    {
+      "task_id": 812,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 21
+    }
+  ],
+  "c2_rows": [
+    {
+      "task_id": 968,
+      "sample_index": 0,
+      "source": "verified_reference_correction",
+      "target_tokens": 38
+    },
+    {
+      "task_id": 881,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 142
+    },
+    {
+      "task_id": 932,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 58
+    },
+    {
+      "task_id": 974,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 220
+    },
+    {
+      "task_id": 907,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 386
+    },
+    {
+      "task_id": 712,
+      "sample_index": null,
+      "source": "verified_reference",
+      "target_tokens": 51
+    },
+    {
+      "task_id": 923,
+      "sample_index": 0,
+      "source": "verified_reference_correction",
+      "target_tokens": 126
+    },
+    {
+      "task_id": 968,
+      "sample_index": null,
+      "source": "verified_reference",
+      "target_tokens": 38
+    },
+    {
+      "task_id": 958,
+      "sample_index": 1,
+      "source": "self_recovery",
+      "target_tokens": 181
+    },
+    {
+      "task_id": 828,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 111
+    },
+    {
+      "task_id": 960,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 163
+    },
+    {
+      "task_id": 949,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 210
+    },
+    {
+      "task_id": 918,
+      "sample_index": 0,
+      "source": "verified_reference_correction",
+      "target_tokens": 163
+    },
+    {
+      "task_id": 640,
+      "sample_index": 1,
+      "source": "self_recovery",
+      "target_tokens": 54
+    },
+    {
+      "task_id": 640,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 54
+    },
+    {
+      "task_id": 699,
+      "sample_index": 0,
+      "source": "verified_reference_correction",
+      "target_tokens": 100
+    },
+    {
+      "task_id": 831,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 73
+    },
+    {
+      "task_id": 828,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 102
+    },
+    {
+      "task_id": 909,
+      "sample_index": 1,
+      "source": "verified_reference_correction",
+      "target_tokens": 46
+    },
+    {
+      "task_id": 885,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 223
+    },
+    {
+      "task_id": 956,
+      "sample_index": 0,
+      "source": "verified_reference_correction",
+      "target_tokens": 34
+    },
+    {
+      "task_id": 821,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 197
+    },
+    {
+      "task_id": 881,
+      "sample_index": 0,
+      "source": "self_recovery",
+      "target_tokens": 142
+    },
+    {
+      "task_id": 929,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 43
+    },
+    {
+      "task_id": 833,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 18
+    },
+    {
+      "task_id": 857,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 25
+    },
+    {
+      "task_id": 923,
+      "sample_index": null,
+      "source": "verified_reference",
+      "target_tokens": 126
+    },
+    {
+      "task_id": 914,
+      "sample_index": 1,
+      "source": "self_recovery",
+      "target_tokens": 260
+    },
+    {
+      "task_id": 907,
+      "sample_index": 0,
+      "source": "verified_reference_correction",
+      "target_tokens": 72
+    },
+    {
+      "task_id": 706,
+      "sample_index": 1,
+      "source": "verified_reference_correction",
+      "target_tokens": 101
+    },
+    {
+      "task_id": 712,
+      "sample_index": 0,
+      "source": "verified_reference_correction",
+      "target_tokens": 51
+    },
+    {
+      "task_id": 625,
+      "sample_index": 1,
+      "source": "self_recovery",
+      "target_tokens": 67
+    },
+    {
+      "task_id": 929,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 37
+    },
+    {
+      "task_id": 617,
+      "sample_index": 0,
+      "source": "verified_reference_correction",
+      "target_tokens": 115
+    },
+    {
+      "task_id": 861,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 49
+    },
+    {
+      "task_id": 685,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 115
+    },
+    {
+      "task_id": 881,
+      "sample_index": 0,
+      "source": "verified_reference_correction",
+      "target_tokens": 75
+    },
+    {
+      "task_id": 821,
+      "sample_index": 0,
+      "source": "verified_reference_correction",
+      "target_tokens": 47
+    },
+    {
+      "task_id": 625,
+      "sample_index": 1,
+      "source": "verified_reference_correction",
+      "target_tokens": 64
+    },
+    {
+      "task_id": 885,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 207
+    },
+    {
+      "task_id": 906,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 68
+    },
+    {
+      "task_id": 914,
+      "sample_index": 1,
+      "source": "verified_reference_correction",
+      "target_tokens": 79
+    },
+    {
+      "task_id": 958,
+      "sample_index": 1,
+      "source": "verified_reference_correction",
+      "target_tokens": 183
+    },
+    {
+      "task_id": 640,
+      "sample_index": 0,
+      "source": "verified_reference_correction",
+      "target_tokens": 41
+    },
+    {
+      "task_id": 960,
+      "sample_index": 0,
+      "source": "self_recovery",
+      "target_tokens": 163
+    },
+    {
+      "task_id": 960,
+      "sample_index": 0,
+      "source": "verified_reference_correction",
+      "target_tokens": 73
+    },
+    {
+      "task_id": 956,
+      "sample_index": 0,
+      "source": "self_recovery",
+      "target_tokens": 41
+    },
+    {
+      "task_id": 815,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 151
+    },
+    {
+      "task_id": 861,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 64
+    },
+    {
+      "task_id": 617,
+      "sample_index": null,
+      "source": "verified_reference",
+      "target_tokens": 115
+    },
+    {
+      "task_id": 663,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 27
+    },
+    {
+      "task_id": 914,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 132
+    },
+    {
+      "task_id": 974,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 164
+    },
+    {
+      "task_id": 958,
+      "sample_index": 1,
+      "source": "model_success",
+      "target_tokens": 181
+    },
+    {
+      "task_id": 949,
+      "sample_index": 0,
+      "source": "model_success",
+      "target_tokens": 97
+    }
+  ],
+  "sequence_exclusions": {
+    "success": [],
+    "recovery": [
+      {
+        "task_id": 821,
+        "source": "self_recovery"
+      },
+      {
+        "task_id": 907,
+        "source": "self_recovery"
+      }
+    ]
+  },
+  "notes": [
+    "C1 contains all fitting success-only rows.",
+    "C2 contains all fitting recovery rows and selected success rows.",
+    "Same training examples count and gradient updates; target tokens closely matched.",
+    "Different prompt lengths are not controlled; report prompt/computation costs separately.",
+    "Recovery corrections include separately labeled self and reference sources.",
+    "All training examples were verified on original MBPP visible tests only."
+  ]
+}

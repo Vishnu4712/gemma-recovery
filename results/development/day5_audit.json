@@ -1,0 +1,197 @@
+{
+  "source_zip": "gemma_day5_backup.zip",
+  "source_sha256": "dd5b39cb986d6e190ed0828bb2616f3e7a889a987934d447b7759882e3d2c2b9",
+  "scope": "development-only; frozen 70-task holdout was not used",
+  "split": {
+    "dev": 110,
+    "prior_dev": 30,
+    "additional_dev": 80,
+    "untouched_holdout": 70
+  },
+  "visible_test_vs_official_score": {
+    "visible_pass_official_pass": 62,
+    "visible_pass_official_fail": 17,
+    "visible_fail_official_pass": 2,
+    "visible_fail_official_fail": 29,
+    "false_alarm_task_ids": [
+      139,
+      276
+    ],
+    "hidden_only_failure_task_ids": [
+      16,
+      20,
+      61,
+      92,
+      118,
+      127,
+      145,
+      167,
+      265,
+      267,
+      272,
+      285,
+      287,
+      294,
+      391,
+      427,
+      451
+    ]
+  },
+  "fixed_state_on_all_visible_failures": {
+    "n": 31,
+    "by_model": {
+      "c0": {
+        "passed": 6,
+        "total": 31,
+        "rate": 0.1935483870967742,
+        "mean_completion_tokens": 181.03225806451613,
+        "visible_pass": 9
+      },
+      "c1": {
+        "passed": 6,
+        "total": 31,
+        "rate": 0.1935483870967742,
+        "mean_completion_tokens": 172.25806451612902,
+        "visible_pass": 9
+      },
+      "c2": {
+        "passed": 7,
+        "total": 31,
+        "rate": 0.22580645161290322,
+        "mean_completion_tokens": 171.96774193548387,
+        "visible_pass": 9
+      }
+    },
+    "c2_minus_c1": {
+      "n": 31,
+      "difference": 0.03225806451612903,
+      "ci_low": 0.0,
+      "ci_high": 0.0967741935483871,
+      "discordant_a_only": 1,
+      "discordant_b_only": 0
+    }
+  },
+  "fixed_state_after_excluding_officially_correct_initial_states": {
+    "n": 29,
+    "by_model": {
+      "c0": {
+        "passed": 4,
+        "total": 29,
+        "rate": 0.13793103448275862,
+        "mean_completion_tokens": 190.72413793103448,
+        "visible_pass": 9
+      },
+      "c1": {
+        "passed": 4,
+        "total": 29,
+        "rate": 0.13793103448275862,
+        "mean_completion_tokens": 181.3448275862069,
+        "visible_pass": 9
+      },
+      "c2": {
+        "passed": 5,
+        "total": 29,
+        "rate": 0.1724137931034483,
+        "mean_completion_tokens": 181.0344827586207,
+        "visible_pass": 9
+      }
+    },
+    "c2_minus_c1": {
+      "n": 29,
+      "difference": 0.034482758620689655,
+      "ci_low": 0.0,
+      "ci_high": 0.10344827586206896,
+      "discordant_a_only": 1,
+      "discordant_b_only": 0
+    }
+  },
+  "end_to_end": {
+    "c0": {
+      "n": 30,
+      "ever_solved_by_attempt": {
+        "1": 16,
+        "2": 16,
+        "3": 16
+      },
+      "final_solved": 16,
+      "final_success_rate": 0.5333333333333333,
+      "total_generated_tokens": 6086,
+      "generated_tokens_per_final_solved": 380.375,
+      "mean_executions_per_task": 1.5,
+      "regressed_from_officially_correct_earlier_attempt_task_ids": []
+    },
+    "c1": {
+      "n": 30,
+      "ever_solved_by_attempt": {
+        "1": 17,
+        "2": 17,
+        "3": 17
+      },
+      "final_solved": 16,
+      "final_success_rate": 0.5333333333333333,
+      "total_generated_tokens": 5280,
+      "generated_tokens_per_final_solved": 330.0,
+      "mean_executions_per_task": 1.4666666666666666,
+      "regressed_from_officially_correct_earlier_attempt_task_ids": [
+        436
+      ]
+    },
+    "c2": {
+      "n": 30,
+      "ever_solved_by_attempt": {
+        "1": 16,
+        "2": 16,
+        "3": 17
+      },
+      "final_solved": 16,
+      "final_success_rate": 0.5333333333333333,
+      "total_generated_tokens": 6147,
+      "generated_tokens_per_final_solved": 384.1875,
+      "mean_executions_per_task": 1.5333333333333334,
+      "regressed_from_officially_correct_earlier_attempt_task_ids": [
+        436
+      ]
+    }
+  },
+  "end_to_end_final_c2_minus_c1": {
+    "n": 30,
+    "difference": 0.0,
+    "ci_low": -0.1,
+    "ci_high": 0.1,
+    "discordant_a_only": 1,
+    "discordant_b_only": 1
+  },
+  "feedback_ablation_c2": {
+    "n": 24,
+    "detailed_pass": 5,
+    "vague_pass": 3,
+    "paired": {
+      "n": 24,
+      "difference": 0.08333333333333333,
+      "ci_low": 0.0,
+      "ci_high": 0.20833333333333334,
+      "discordant_a_only": 2,
+      "discordant_b_only": 0
+    }
+  },
+  "humaneval": {
+    "c0": {
+      "passed": 11,
+      "n": 20
+    },
+    "c1": {
+      "passed": 11,
+      "n": 20
+    },
+    "c2": {
+      "passed": 12,
+      "n": 20
+    }
+  },
+  "audit_notes": [
+    "Fixed-state corrections were generated only for initially visible-failing states; the post-hoc official-correct filter is for analysis, not an online decision.",
+    "Ever-passed by k is an oracle diagnostic, not deployment-time final returned-code success; the agent does not observe hidden test status.",
+    "Official test failures among visible-pass solutions were not retried.",
+    "All CIs are percentile paired bootstrap on task IDs and are exploratory, with one training seed."
+  ]
+}

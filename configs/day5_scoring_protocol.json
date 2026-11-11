@@ -1,0 +1,8 @@
+{
+  "mbpp_requests": 311,
+  "humaneval_requests": 60,
+  "generation_frozen_before_official_scoring": true,
+  "source": "Original MBPP visible tests; original HumanEval public prompts",
+  "hidden_use": "EvalPlus base+plus in separate CPU process only",
+  "do_not_train_on_this_split": true
+}

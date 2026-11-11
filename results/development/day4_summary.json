@@ -1,0 +1,40 @@
+{
+  "benchmark": "EvalPlus MBPP+ official base + plus oracle",
+  "dev_only": true,
+  "n_dev_tasks": 30,
+  "n_fixed_failed_states": 7,
+  "base_first_attempt_official_pass": 20,
+  "base_first_attempt_official_rate": 0.6666666666666666,
+  "fixed_state_results": {
+    "c0": {
+      "official_recovery": 1,
+      "n_failed_states": 7,
+      "recovery_rate": 0.14285714285714285,
+      "visible_recovery_rate": 0.42857142857142855,
+      "mean_completion_tokens": 157.57142857142858
+    },
+    "c1": {
+      "official_recovery": 1,
+      "n_failed_states": 7,
+      "recovery_rate": 0.14285714285714285,
+      "visible_recovery_rate": 0.42857142857142855,
+      "mean_completion_tokens": 155.71428571428572
+    },
+    "c2": {
+      "official_recovery": 2,
+      "n_failed_states": 7,
+      "recovery_rate": 0.2857142857142857,
+      "visible_recovery_rate": 0.5714285714285714,
+      "mean_completion_tokens": 135.57142857142858
+    }
+  },
+  "paired_C2_vs_C1": {
+    "difference_c2_minus_c1": 0.14285714285714285,
+    "ci_low": 0.0,
+    "ci_high": 0.42857142857142855,
+    "n_pairs": 7,
+    "discordant_c2_only": 1,
+    "discordant_c1_only": 0
+  },
+  "methodology_note": "Fixed starting states are first-attempt visible failures from C0; hidden tests are only scored after all generations and never returned as feedback."
+}

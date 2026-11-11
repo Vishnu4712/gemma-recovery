@@ -1,0 +1,20 @@
+{
+  "train_runtime": 73.8894,
+  "train_samples_per_second": 0.744,
+  "train_steps_per_second": 0.189,
+  "total_flos": 619715804758848.0,
+  "train_loss": 0.8207114189863205,
+  "epoch": 1.0,
+  "condition": "c2",
+  "base_model": "google/gemma-4-E4B-it",
+  "num_examples": 55,
+  "supervised_target_tokens_per_epoch": 5963,
+  "max_seq_len": 1024,
+  "learning_rate": 0.0001,
+  "epochs": 1,
+  "gradient_accumulation_steps": 4,
+  "lora_rank": 8,
+  "seed": 42,
+  "adapter_path": "/kaggle/working/day3_outputs/adapter_c2",
+  "gpu0_peak_allocated_gib": 12.321
+}

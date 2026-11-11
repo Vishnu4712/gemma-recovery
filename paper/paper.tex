@@ -1,0 +1,128 @@
+% Final manuscript built from the Day 1--6 executed Kaggle notebooks.
+% Replace the author block and add the public GitHub/Kaggle URL before submission.
+\documentclass[10pt,twocolumn]{article}
+\usepackage[letterpaper,margin=0.72in,top=0.78in,bottom=0.78in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern,microtype}
+\usepackage{booktabs,graphicx,amsmath,amssymb,array,caption,url,xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=1.15em,topsep=2pt,itemsep=1pt}
+\captionsetup{font=small,labelfont=bf}
+\setlength{\columnsep}{0.25in}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\newcommand{\gmodel}{Gemma~4 E4B-it}
+\newcommand{\mbppplus}{MBPP+}
+\newcommand{\humanplus}{HumanEval+}
+\title{\vspace{-1.2em}\textbf{Learning to Recover: A Controlled Study of Execution-Feedback Training for Small Coding Models}\\[.22em]
+\large A matched-budget QLoRA comparison on function-level Python repair}
+\author{\textbf{[Author Name]} \\[-.1em] \small [Institution] \quad \texttt{[contact or GitHub URL]}}
+\date{November 2026 \quad \textbar \quad Final frozen-holdout results included}
+\begin{document}
+\maketitle
+\vspace{-1.2em}
+\begin{abstract}
+We ask whether a small coding language model learns to \emph{recover} from failed code more effectively when fine-tuned on failure--execution-feedback--correction examples than when trained on successful code alone. Using \gmodel{}, we collect visible-test trajectories and independently train two 4-bit QLoRA adapters: success-only (C1) and recovery-aware (C2), each with 55 examples and exactly 5,963 supervised completion tokens. The unmodified base model (C0) provides an additional control. In a paired, fixed-starting-state development experiment, C2 repairs 5/29 officially incorrect states (17.2\%), compared with 4/29 (13.8\%) for C1. \textbf{This advantage does not replicate on a frozen 70-task \mbppplus{} holdout:} among 24 officially incorrect, visible-failing initial states, C1 and C2 each repair 2 (8.3\%), while C0 repairs 3 (12.5\%). On a 30-task development study allowing up to three attempts, all conditions return officially correct final code on 16/30 tasks. A small feedback ablation favors detailed errors over a generic retry instruction (5/24 versus 3/24 for C2), but is inconclusive. We identify disagreement between original visible tests and the official extended evaluator, including false failure signals capable of inducing harmful edits. Our results do not establish a recovery advantage from tiny offline supervised datasets; they motivate broader recovery supervision and explicit auditing of feedback quality and final returned code.
+\end{abstract}
+
+\section{Introduction}
+Agentic coding systems need to do more than generate a first answer: they must interpret failed tests, correct their code, and stop before further revisions cause regressions. Tool-augmented recovery is especially consequential for small models with limited compute budgets. Offline supervised fine-tuning on successful solutions is straightforward, but its targets contain no explicit failed attempt or execution feedback. Recovery-oriented training instead conditions a corrected solution on the model's preceding error and the observable test result.
+
+We study whether that additional supervision produces a measurable benefit \emph{under a small, matched training budget}. This is motivated by prior work finding that offline correction traces need not translate into self-correction behavior \cite{score}, while execution-feedback RL can improve iterative synthesis \cite{rlef}. We restrict scope to standalone Python function synthesis and revision, rather than repository-level bug localization, file editing, or SWE-bench. The contribution is a transparent, reproducible controlled pilot, not a new optimization algorithm.
+
+Our analysis distinguishes (a) visible-test failure, which triggers the agent's retry; (b) official \mbppplus{} correctness, used only for offline evaluation; and (c) final returned-code correctness, which can be lower than the oracle score of any attempt encountered. We report both development and independently frozen holdout results, including null findings.
+
+\section{Research Questions}
+\textbf{RQ1:} Does recovery-aware QLoRA outperform success-only QLoRA on identical failed starting states? \textbf{RQ2:} Are benefits concentrated in wrong-output, syntax, or runtime failures? \textbf{RQ3:} Does the recovery condition avoid repeated failed attempts or reduce tokens and test executions? \textbf{RQ4:} Does a benefit persist under a small retry budget and on held-out tasks or a separate programming benchmark?
+
+\section{Methods}
+\subsection{Problem pool and trajectory collection}
+MBPP provides natural-language function specifications, reference implementations, and original visible tests \cite{mbpp}; the EvalPlus framework supplies more extensive scoring for \mbppplus{} and \humanplus{} \cite{evalplus}. We exclude 108 overlapping MBPP+ IDs from an initial 374-task MBPP training partition, retaining 266 eligible training problems. We sample 40 problems, generate two independent C0 trajectories each, and permit at most three attempts using the original public tests. Across 80 trajectories, 53 first attempts pass visible tests; nine of 27 initially unsuccessful trajectories subsequently pass. The initially failing attempts comprise 22 wrong-output, four syntax, and one runtime failure. The dataset also includes 17 verified-reference corrections. All such verification is based on original visible tests and is not proof of extended-test correctness.
+
+\subsection{Training conditions}
+\textbf{C0:} The original instruction-tuned \gmodel{} checkpoint \cite{gemma4}. \textbf{C1:} QLoRA trained on 50 successful model solutions and five reference solutions. \textbf{C2:} QLoRA trained on 27 successful model solutions, four standalone references, seven actual model self-recoveries, and 17 reference-based corrections. In a recovery item, the prompt includes the task, earlier unsuccessful code, and observable feedback; the target is corrected Python code. The prompt is masked from the loss. C1/C2 independently start from the same frozen C0; C2 is not further tuned from C1.
+
+We use NF4 quantization, FP16, LoRA rank 8, scaling factor 16, \texttt{q\_proj}/\texttt{v\_proj} language-model targets, learning rate $10^{-4}$, 1,024-token maximum sequence length, batch size one, four gradient-accumulation steps, and one epoch (14 optimizer updates per condition). The training seed is 42. Each condition contains 55 items and exactly 5,963 supervised target tokens, but input prompt length and source mixture differ. This controls target-token supervision, \emph{not} total FLOPs or informational content. Training took 54.4 s (C1) and 73.9 s (C2) on one NVIDIA T4, excluding model setup and evaluation \cite{lora,qlora}.
+
+\subsection{Evaluation and metrics}
+We partition 180 distinct \mbppplus{} IDs into 110 development tasks (30 pilot plus 80 additional) and 70 final tasks. The final 70 IDs are recorded in the Day 5 manifest before their outcomes are inspected. The base model generates the \emph{initial} code for each problem. States failing local visible tests form a paired \emph{fixed-state} cohort: C0, C1, and C2 independently receive exactly the same starting code and feedback, then produce one correction each. The original visible tests are the only execution feedback used for generation. Official EvalPlus tests are evaluated in a separate stage, \emph{after all completions are frozen}, and never provided to the generator.
+
+The operational correction cohort contains all \emph{visible-failing} starting states. For our audited metric we additionally restrict \emph{post hoc} to the subset that fails official MBPP+ scoring initially, avoiding counting an already correct program as a repaired one. This restriction changes only the analysis denominator, not the model's input, action, or evaluated task IDs. We define repair success as the resulting code passing official MBPP+ tests. Differences between C2 and C1 are measured per paired problem; confidence intervals use percentile bootstrap resampling of tasks (20,000 draws). A second, exploratory 30-task development experiment measures up to three sequential attempts and counts both \emph{ever-correct} and \emph{final returned-code} outcomes. All models use a 384-token generation cap per attempt.
+
+\section{Results}
+\subsection{RQ1: Paired recovery and independent holdout}
+On development, 31 of 110 initial solutions fail visible tests. Two (IDs 139 and 276) nevertheless pass the official evaluator, leaving 29 audited incorrect states. C2 repairs five of these, while C1 and C0 each repair four. The C2--C1 difference is $+3.45$ percentage points (95\% task-paired bootstrap interval $[0,10.34]$ points); one task accounts for the gain.
+
+On the frozen 70-task holdout, 35 C0 initial answers (50.0\%) pass official \mbppplus{}. Twenty-seven first attempts fail the local visible checks, but three (IDs 87, 233, 312) already pass official tests, leaving 24 genuinely incorrect fixed starting states. The \textbf{primary holdout comparison is a tie}: C1 and C2 each repair 2/24 (8.3\%), while C0 repairs 3/24 (12.5\%). C1 and C2 succeed on exactly the same two problems; their empirical paired bootstrap difference and interval are both zero. This degenerate interval describes this sample, \emph{not proof of population equivalence}. The final notebook scored 151 generated solutions (70 initials and $27\times3$ corrections). No model parameters or prompt choices were updated from the frozen holdout results.
+
+\begin{table}[t]
+\centering\small
+\caption{Official MBPP+ one-step repair rates on the same C0 failed states. Officially correct initial code is excluded only in the audited analysis.}
+\label{tab:main}
+\begin{tabular}{@{}lccc@{}}\toprule
+Split & C0 & C1 & C2\\\midrule
+Development (29) & 4/29 & 4/29 & 5/29\\
+Frozen holdout (24) & 3/24 & 2/24 & 2/24\\\bottomrule
+\end{tabular}
+\end{table}
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/dev_vs_holdout.png}
+\caption{Paired fixed-state repair, audited against official MBPP+ scoring. The apparent one-problem development advantage of C2 does not replicate on the frozen holdout.}
+\label{fig:compare}
+\end{figure}
+
+\subsection{RQ2: Failure categories}
+Development failed states are concentrated in wrong-output cases: 29/31 visible failures are classified as wrong output and only two as syntax errors; none are runtime failures in this subset. C2 repairs 7/29 wrong-output cases when counting all visible-failing states, compared with 6/29 for C0 and C1. No condition repairs either of the two syntax cases. These descriptive counts are too small to attribute effects reliably to failure categories. The classification is derived from the local runner's observed feedback, not a hand-labeled semantic bug taxonomy.
+
+\subsection{RQ3--RQ4: Efficiency, retries and transfer}
+In the 30-task development end-to-end study, C0, C1, and C2 each return officially correct \emph{final} code on 16/30 tasks. Counting any officially passing attempt instead yields 16/30, 17/30, and 17/30: both fine-tuned conditions sometimes revise a correct intermediate answer into an incorrect final one. Total output tokens are 6,086 (C0), 5,280 (C1), and 6,147 (C2). Normalized by \emph{final} solved count, this is 380.4, 330.0, and 384.2 generated tokens per solved problem. Mean visible test executions per task are 1.50, 1.47, and 1.53. Hence the data do not show a C2 efficiency advantage. Exact repeated unsuccessful corrections in a separate fixed-state development comparison number 4, 3, and 3 for C0/C1/C2.
+
+For exploratory transfer, first-attempt \humanplus{} correctness on 20 tasks is 11/20 (C0), 11/20 (C1), and 12/20 (C2). This is \emph{not} a transfer-of-recovery benchmark, because no correction step is evaluated, and the sample is too small for a robust generalization claim. The frozen final experiment tests one fixed-state correction, not multi-attempt sequential recovery or cross-benchmark transfer.
+
+\subsection{Feedback specificity and reliability}
+On 24 newly added development failure states, C2 repairs 5 with detailed local test feedback versus 3 with only a generic retry instruction, a paired $+8.3$ percentage-point difference (95\% bootstrap interval $[0,20.8]$). C1 was not evaluated under this same ablation, so this does not isolate an effect of recovery training.
+
+Local and official tests disagree in both splits (Table~\ref{tab:mismatch}). On development, 17 initially visible-passing solutions fail the official tests and two initially visible-failing solutions pass them; on the frozen holdout, the corresponding counts are 11 and three. A separate reference-compatibility probe flags one reference implementation (holdout ID 123) with a local runtime/resource-limit error; we keep all 70 IDs rather than silently excluding it. These cases suggest that test coverage, equality semantics, and runner constraints deserve explicit checking. In particular, a false local failure signal can trigger a harmful edit, as seen in the end-to-end regression on development task 436.
+
+\begin{table}[t]
+\centering\small
+\caption{C0 first-attempt visible-test agreement with official MBPP+ scoring. Rows are the local test outcome.}
+\label{tab:mismatch}
+\begin{tabular}{@{}llrr@{}}\toprule
+Split & Local result & Official pass & Official fail\\\midrule
+Development & Pass & 62 & 17\\
+Development & Fail & 2 & 29\\
+Final holdout & Pass & 32 & 11\\
+Final holdout & Fail & 3 & 24\\\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Discussion and Limitations}
+The simplest interpretation is \emph{no detected benefit} from recovery-aware SFT with this small dataset, rather than a claim that learning recovery is impossible. Only seven C2 items are genuine model self-recoveries; the remaining recovery targets come from reference solutions. C2 also replaces some plain successes with correction-conditioned cases relative to C1. Such mixture changes, combined with 14 optimizer updates, a single seed, and prompt-length differences, limit causal attribution. The repaired-state cohorts (29 development and 24 final) are small; a one-case difference shifts the observed rate by 3.4--4.2 percentage points. Because starting states are sampled from the same base model, this experiment does not measure recovery from each fine-tuned model's \emph{own} error distribution, an important distribution-shift caveat discussed by SCoRe \cite{score}.
+
+The paper does not claim repository-scale software engineering capability. Original MBPP tests are imperfect proxies for correctness, and the subprocess runner has CPU/address-space limits but is \emph{not} a security sandbox. We cannot exclude pretraining contamination by task-ID split alone. Moreover, the degenerate holdout paired CI arises from identical observed successes and offers limited uncertainty characterization outside this sample. We did not try extra epochs, change the dataset after holdout inspection, or train on holdout outcomes.
+
+Promising future work includes collecting hundreds of independently verified \emph{self}-recoveries, checking candidate corrections against stronger tests before supervised training, balancing correction and success mixtures, explicitly supervising diagnosis or root-cause localization, and comparing additional training epochs with multiple seeds. Such experiments should be tuned on new development data and evaluated on a \emph{new} untouched holdout, not reused to claim fresh independent confirmation from these 70 tasks. Recent negative-trajectory training research motivates better error attribution rather than treating all failed examples as equally informative \cite{negativepi}.
+
+\section{Conclusion}
+A matched-budget comparison of success-only and recovery-aware QLoRA for \gmodel{} found a one-case development improvement but \textbf{no improvement in the independently frozen holdout}. Both fine-tuned conditions repaired 2/24 officially incorrect initial states, and all three conditions returned the same number of correct final programs in the exploratory multi-turn development study. The most actionable lessons are that offline recovery data must be diverse and validated, paired evaluations must control the failed starting state, and a coding agent should be evaluated on its \emph{final} code under reliable feedback. The accompanying notebooks and scripts reproduce the low-resource study and explicitly document these negative results.
+
+\section*{Artifact availability}
+Source, notebooks, manifests, audited summaries, and figure scripts are supplied in the accompanying project repository; the public GitHub URL and Kaggle versioned artifact links must be filled in by the author before submission. Raw model-generated code and adapters should be published separately, if permitted, to enable complete independent replay.
+
+\vspace{-.5em}
+\begin{thebibliography}{99}\footnotesize\setlength{\itemsep}{1pt}
+\bibitem{mbpp} J. Austin et al. \emph{Program Synthesis with Large Language Models}. arXiv:2108.07732, 2021.
+\bibitem{evalplus} J. Liu, C. S. Xia, Y. Wang, and L. Zhang. \emph{Is Your Code Generated by ChatGPT Really Correct? Rigorous Evaluation of Large Language Models for Code Generation}. NeurIPS, 2023.
+\bibitem{score} A. Kumar et al. \emph{Training Language Models to Self-Correct via Reinforcement Learning}. ICLR, 2025.
+\bibitem{rlef} J. Gehring et al. \emph{RLEF: Grounding Code LLMs in Execution Feedback with Reinforcement Learning}. ICML, 2025.
+\bibitem{reflexion} N. Shinn et al. \emph{Reflexion: Language Agents with Verbal Reinforcement Learning}. NeurIPS, 2023.
+\bibitem{negativepi} M. Kim. \emph{How to Learn from Negative Trajectories in Coding Agents}. Microsoft Debug-gym Research Blog, August 2026. \url{https://microsoft.github.io/debug-gym/blog/2026/08/negative-pi/}.
+\bibitem{lora} E. J. Hu et al. \emph{LoRA: Low-Rank Adaptation of Large Language Models}. ICLR, 2022.
+\bibitem{qlora} T. Dettmers et al. \emph{QLoRA: Efficient Finetuning of Quantized LLMs}. NeurIPS, 2023.
+\bibitem{gemma4} Google DeepMind. \emph{Gemma 4 Model Card}, 2026. \url{https://ai.google.dev/gemma/docs/core/model_card_4}.
+\end{thebibliography}
+\end{document}

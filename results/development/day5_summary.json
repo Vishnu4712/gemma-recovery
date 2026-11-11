@@ -1,0 +1,186 @@
+{
+  "scope": "DEV ONLY (30 old + new dev), not untouched final evaluation",
+  "n_dev_tasks": 110,
+  "n_fixed_failed_states": 31,
+  "n_visible_first_attempt_pass": 79,
+  "failure_types": {
+    "syntax_error": {
+      "n": 2,
+      "c0_success": 0,
+      "c1_success": 0,
+      "c2_success": 0
+    },
+    "wrong_output": {
+      "n": 29,
+      "c0_success": 6,
+      "c1_success": 6,
+      "c2_success": 7
+    }
+  },
+  "fixed_state_results": {
+    "c0": {
+      "n_failed_states": 31,
+      "official_success": 6,
+      "official_rate": 0.1935483870967742,
+      "visible_success": 9,
+      "mean_generated_tokens": 181.03225806451613,
+      "mean_prompt_tokens": 498.35483870967744,
+      "exact_repeated_unsuccessful": 4,
+      "near_repeated_unsuccessful": 3
+    },
+    "c1": {
+      "n_failed_states": 31,
+      "official_success": 6,
+      "official_rate": 0.1935483870967742,
+      "visible_success": 9,
+      "mean_generated_tokens": 172.25806451612902,
+      "mean_prompt_tokens": 498.35483870967744,
+      "exact_repeated_unsuccessful": 3,
+      "near_repeated_unsuccessful": 3
+    },
+    "c2": {
+      "n_failed_states": 31,
+      "official_success": 7,
+      "official_rate": 0.22580645161290322,
+      "visible_success": 9,
+      "mean_generated_tokens": 171.96774193548387,
+      "mean_prompt_tokens": 498.35483870967744,
+      "exact_repeated_unsuccessful": 3,
+      "near_repeated_unsuccessful": 3
+    }
+  },
+  "paired_C2_minus_C1": {
+    "difference_c2_minus_c1": 0.03225806451612903,
+    "ci_low": 0.0,
+    "ci_high": 0.0967741935483871,
+    "n_pairs": 31,
+    "discordant_c2_only": 1,
+    "discordant_c1_only": 0
+  },
+  "paired_C2_minus_C0": {
+    "difference_c2_minus_c1": 0.03225806451612903,
+    "ci_low": 0.0,
+    "ci_high": 0.0967741935483871,
+    "n_pairs": 31,
+    "discordant_c2_only": 1,
+    "discordant_c1_only": 0
+  },
+  "fixed_case_records": "fixed_state_by_task.csv",
+  "definitions": {
+    "recovery": "official base AND plus tests pass after a correction from identical failed C0 state",
+    "repeated_exact": "AST-normalized code unchanged from previous attempt AND current visible tests fail",
+    "repeated_near": "normalized source similarity >=0.95, nonidentical, AND current visible tests fail",
+    "tokens_per_solved": "all generated completion tokens across tasks divided by number of officially solved tasks",
+    "three_attempt_success": "ever passed official tests among produced attempts up to k (adaptive visible-test stopping)",
+    "confidence_intervals": "paired bootstrap resampling development task IDs; one training seed"
+  },
+  "no_feedback_ablation_new_dev_only": {
+    "n_states": 24,
+    "with_feedback_successes": 5,
+    "without_detailed_feedback_successes": 3,
+    "paired_difference": {
+      "difference_c2_minus_c1": 0.08333333333333333,
+      "ci_low": 0.0,
+      "ci_high": 0.20833333333333334,
+      "n_pairs": 24,
+      "discordant_c2_only": 2,
+      "discordant_c1_only": 0
+    },
+    "interpretation": "Vague retry prompt vs exact original visible-test error; only on newly added development tasks"
+  },
+  "end_to_end_budget": {
+    "c0": {
+      "n_tasks": 30,
+      "success_1": 16,
+      "success_2": 16,
+      "success_3": 16,
+      "rate_1": 0.5333333333333333,
+      "rate_2": 0.5333333333333333,
+      "rate_3": 0.5333333333333333,
+      "total_generated_tokens": 6086,
+      "tokens_per_solved_problem": 380.375,
+      "mean_test_executions_per_task": 1.5,
+      "exact_repeated_unsuccessful": 5,
+      "near_repeated_unsuccessful": 3
+    },
+    "c1": {
+      "n_tasks": 30,
+      "success_1": 17,
+      "success_2": 17,
+      "success_3": 17,
+      "rate_1": 0.5666666666666667,
+      "rate_2": 0.5666666666666667,
+      "rate_3": 0.5666666666666667,
+      "total_generated_tokens": 5280,
+      "tokens_per_solved_problem": 310.5882352941176,
+      "mean_test_executions_per_task": 1.4666666666666666,
+      "exact_repeated_unsuccessful": 4,
+      "near_repeated_unsuccessful": 3
+    },
+    "c2": {
+      "n_tasks": 30,
+      "success_1": 16,
+      "success_2": 16,
+      "success_3": 17,
+      "rate_1": 0.5333333333333333,
+      "rate_2": 0.5333333333333333,
+      "rate_3": 0.5666666666666667,
+      "total_generated_tokens": 6147,
+      "tokens_per_solved_problem": 361.5882352941176,
+      "mean_test_executions_per_task": 1.5333333333333334,
+      "exact_repeated_unsuccessful": 4,
+      "near_repeated_unsuccessful": 3
+    }
+  },
+  "end_to_end_paired_C2_minus_C1": {
+    "k=1": {
+      "difference_c2_minus_c1": -0.03333333333333333,
+      "ci_low": -0.1,
+      "ci_high": 0.0,
+      "n_pairs": 30,
+      "discordant_c2_only": 0,
+      "discordant_c1_only": 1
+    },
+    "k=2": {
+      "difference_c2_minus_c1": -0.03333333333333333,
+      "ci_low": -0.1,
+      "ci_high": 0.0,
+      "n_pairs": 30,
+      "discordant_c2_only": 0,
+      "discordant_c1_only": 1
+    },
+    "k=3": {
+      "difference_c2_minus_c1": 0.0,
+      "ci_low": -0.1,
+      "ci_high": 0.1,
+      "n_pairs": 30,
+      "discordant_c2_only": 1,
+      "discordant_c1_only": 1
+    }
+  },
+  "humaneval_plus_single_shot_transfer": {
+    "c0": {
+      "n": 20,
+      "passed": 11,
+      "rate": 0.55
+    },
+    "c1": {
+      "n": 20,
+      "passed": 11,
+      "rate": 0.55
+    },
+    "c2": {
+      "n": 20,
+      "passed": 12,
+      "rate": 0.6
+    }
+  },
+  "humaneval_paired_C2_minus_C1": {
+    "difference_c2_minus_c1": 0.05,
+    "ci_low": 0.0,
+    "ci_high": 0.15,
+    "n_pairs": 20,
+    "discordant_c2_only": 1,
+    "discordant_c1_only": 0
+  }
+}

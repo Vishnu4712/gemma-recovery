@@ -1,0 +1,16 @@
+{
+  "model": "google/gemma-4-E4B-it",
+  "seed": 42,
+  "num_selected_tasks": 40,
+  "samples_per_task": 2,
+  "max_attempts": 3,
+  "max_new_tokens": 384,
+  "generation": {
+    "do_sample": true,
+    "initial_temperature": 0.7,
+    "retry_temperature": 0.4,
+    "top_p": 0.95
+  },
+  "evaluation": "original MBPP visible tests only",
+  "train_id_source": "Day 1 mbpp_split_manifest.json"
+}

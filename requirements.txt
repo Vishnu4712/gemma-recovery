@@ -1,0 +1,16 @@
+# GPU stack: install a Torch build compatible with your CUDA driver first.
+# Versions used in the 2026 Kaggle experiments are captured in notebook outputs.
+torch
+transformers>=5.0
+accelerate
+peft
+trl
+bitsandbytes
+datasets
+safetensors
+evalplus
+numpy
+pandas
+matplotlib
+tqdm
+nbformat

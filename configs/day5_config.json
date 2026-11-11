@@ -1,0 +1,16 @@
+{
+  "model": "google/gemma-4-E4B-it",
+  "new_dev_n": 80,
+  "final_reserved_n": 70,
+  "e2e_n": 30,
+  "humaneval_n": 20,
+  "max_new_tokens": 384,
+  "max_attempts": 3,
+  "seed_partition": 20261109,
+  "seed_e2e": 20261110,
+  "seed_humaneval": 20261111,
+  "run_e2e": true,
+  "run_no_feedback": true,
+  "run_humaneval": true,
+  "generation": "Deterministic do_sample=False, no adapter for C0, same original visible MBPP tests"
+}

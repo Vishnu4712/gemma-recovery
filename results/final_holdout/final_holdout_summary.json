@@ -1,0 +1,45 @@
+{
+  "scope": "FROZEN FINAL HOLDOUT -- selected before Day 5 evaluation; no tuning performed",
+  "n_tasks": 70,
+  "first_attempt_official_pass": 35,
+  "visible_failed_starts": 27,
+  "officially_correct_visible_fail_ids": [
+    87,
+    233,
+    312
+  ],
+  "true_failed_starts": 24,
+  "by_model": {
+    "c0": {
+      "passed": 3,
+      "n": 24,
+      "rate": 0.125
+    },
+    "c1": {
+      "passed": 2,
+      "n": 24,
+      "rate": 0.08333333333333333
+    },
+    "c2": {
+      "passed": 2,
+      "n": 24,
+      "rate": 0.08333333333333333
+    }
+  },
+  "paired_C2_vs_C1": {
+    "difference_c2_minus_c1": 0.0,
+    "ci_low": 0.0,
+    "ci_high": 0.0,
+    "n_pairs": 24,
+    "discordant_c2_only": 0,
+    "discordant_c1_only": 0
+  },
+  "official_scoring_requests": 151,
+  "note": "Hidden tests only evaluated after frozen generations. Distinguish protocol-defined visible failure states from post-hoc true incorrect states.",
+  "source_provenance": {
+    "artifact": "final-holdout-day-6-2.ipynb",
+    "notebook_sha256": "72287d5f4a25924acafd24ec81ce771065596d7477f40e1d1b7425a34fb02d94",
+    "extraction": "Executed cell L summary, not an independent row-level recomputation",
+    "raw_row_logs": "Obtain gemma_final_holdout_backup.zip from Kaggle for independent replay using scripts/audit_day6.py"
+  }
+}

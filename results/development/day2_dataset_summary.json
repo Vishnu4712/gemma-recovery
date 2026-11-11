@@ -1,0 +1,42 @@
+{
+  "model": "google/gemma-4-E4B-it",
+  "num_eligible_train_tasks": 266,
+  "num_trajectories": 80,
+  "unique_sampled_tasks": 40,
+  "first_attempt_status_counts": {
+    "wrong_output": 22,
+    "passed": 53,
+    "syntax_error": 4,
+    "runtime_error": 1
+  },
+  "first_attempt_visible_success_rate": 0.6625,
+  "three_attempt_visible_success_rate": 0.775,
+  "c1_success_examples": 55,
+  "c1_source_counts": {
+    "verified_reference": 5,
+    "model_success": 50
+  },
+  "c2_self_recovery_examples": 9,
+  "c2_reference_recovery_examples_optional": 17,
+  "c2_recovery_combined_examples": 26,
+  "c2_mixed_candidate_examples": 81,
+  "self_recovery_failure_types": {
+    "wrong_output": 7,
+    "runtime_error": 1,
+    "syntax_error": 1
+  },
+  "recovery_failure_types_all": {
+    "wrong_output": 19,
+    "runtime_error": 2,
+    "syntax_error": 5
+  },
+  "reference_not_verified_task_ids": [],
+  "rejected_model_candidates_after_recheck": 0,
+  "evaluation_overlap_ids": [],
+  "notes": [
+    "All acceptance checks use ONLY original MBPP visible tests; not hidden MBPP+ correctness.",
+    "Correction provenance is recorded; model-generated and reference-based recovery are separated.",
+    "Day 3 must use prompt-completion training and match assistant-target token budgets.",
+    "Do not use C2 mixed rows naively without token matching/label masking."
+  ]
+}
