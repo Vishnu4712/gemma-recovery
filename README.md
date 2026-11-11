@@ -1,7 +1,6 @@
 # Learning to Recover: Execution-Feedback Training for Small Coding Models
 
-**Kaggle Gemma 4 Developer Agent Competition — Paper Track (November 2026)**  
-**Status: Days 1–6 complete; frozen 70-task MBPP+ evaluation reported.**
+**Kaggle Gemma 4 Developer Agent Competition - Paper Track (November 2026)**  
 
 A small-model empirical study of whether **recovery-aware supervised fine-tuning** improves Gemma 4 E4B-it's ability to repair its own function-level Python errors. We compare three controlled conditions: **C0**, the original model; **C1**, a success-only QLoRA adapter; and **C2**, a mixed success + execution-feedback-correction QLoRA adapter. The study is *not* repository-level SWE-bench or multi-file debugging.
 
