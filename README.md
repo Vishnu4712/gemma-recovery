@@ -55,18 +55,4 @@ This release contains complete experiment **source code** and saved **summary st
 
 See [full reproduction instructions](docs/REPRODUCING.md). The original project ran on a single T4 GPU for inference and QLoRA; training C1/C2 used rank-8 adapters and one epoch. Version installation can change the environment; preserve the executed Kaggle runs for exact version details.
 
-## Important caveats
 
-- Function-level Python repair, not repository navigation, localization, multi-file patch generation, or contest prediction-track submission.
-- The official scoring uses test suites withheld from model feedback, but initial problems and original visible tests are public.
-- Local subprocess execution is **not a hardened sandbox**. Do not run generated code with production credentials or access to private files.
-- A task-ID split cannot rule out the base model's pretraining exposure to benchmark problems.
-- Single training seed, 55 supervised examples per adapter, only seven genuine self-recoveries in C2, unmatched prompt lengths.
-- Observed test disagreement means "initially fails visible tests" is not synonymous with "incorrect under official scoring".
-- Reusing the 70 held-out problems to select new epochs or tune prompts would make any subsequent score exploratory.
-
-## Publishing and citation
-
-Add your public GitHub and Kaggle version URLs before submitting the final Kaggle Writeup. Keep raw generated-code logs, adapters, access tokens and copied benchmark data outside the repository unless rights and privacy have been checked. The package intentionally **does not include a LICENSE**; select an appropriate license before making it public if you wish to grant reuse permissions, and preserve upstream licenses.
-
-The competition's **Paper Track** requires a **submitted Kaggle Writeup**; a GitHub repository or PDF alone is not the submission. Paper Track deadline: **November 12, 2026, 11:59 PM UTC** (6:59 PM Eastern Standard Time), subject to official organizer updates.
