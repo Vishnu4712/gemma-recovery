@@ -42,6 +42,3 @@ The Day 6 audit validates the frozen manifest, uniqueness of 70 initial records,
 
 A correction is eligible in the **operational** cohort when C0's initial code fails the local original MBPP tests. The **audited** cohort additionally removes inputs whose original solution was already officially correct, *only in the analysis*. Models never receive the extended-test results in their feedback. For multi-attempt evaluation, *final returned-code success* is different from the *ever-correct* diagnostic; a later failed attempt may overwrite an earlier correct program.
 
-### Manuscript
-
-Run `pdflatex paper.tex` twice inside `paper/`, or import the `paper/` directory into Overleaf. Figures and bibliography are local. Check and fill the author/contact/public artifact links before publishing.
